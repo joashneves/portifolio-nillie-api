@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  categoria_de_imagens: one
+  nome: MyString
+  descricao: MyString
+  imagem_caminho: MyString
+
+two:
+  categoria_de_imagens: two
+  nome: MyString
+  descricao: MyString
+  imagem_caminho: MyString
