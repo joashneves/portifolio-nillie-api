@@ -36,7 +36,7 @@ class CategoriasDeImagensController < ApplicationController
   def index
     # includes(:imagens) → eager loading (evita N+1 queries)
     # Sem isso, cada categoria faria uma query separada para buscar imagens
-    categorias = CategoriaDeImagen.all.includes(:imagens)
+    categorias = CategoriaDeImagen.order(:ordem, :nome).includes(:imagens)
     render json: categorias.map { |c| categoria_json(c) }
   end
 
@@ -50,7 +50,10 @@ class CategoriasDeImagensController < ApplicationController
   # POST /categorias_de_imagens
   # Cria uma nova categoria (requer autenticação)
   def create
-    categoria = CategoriaDeImagen.new(categoria_params)
+    categoria = CategoriaDeImagen.new(
+      nome: categoria_params[:nome],
+      ordem: ordem_param
+    )
     save_image(categoria) # Processa e salva a imagem (se enviada)
 
     if categoria.save
@@ -67,8 +70,10 @@ class CategoriasDeImagensController < ApplicationController
   def update
     # Só processa imagem se o request incluir o campo "imagem"
     save_image(@categoria) if params[:imagem].present?
+    @categoria.nome = categoria_params[:nome]
+    @categoria.ordem = ordem_param if params[:ordem].present?
 
-    if @categoria.update(categoria_params)
+    if @categoria.save
       render json: categoria_json(@categoria)
     else
       render json: { errors: @categoria.errors.full_messages }, status: :unprocessable_entity
@@ -98,6 +103,16 @@ class CategoriasDeImagensController < ApplicationController
   # Protege contra ataques de mass assignment
   def categoria_params
     params.permit(:nome)
+  end
+
+  # Converte o param ordem para inteiro (posição na exibição)
+  # Vazio ou inválido → nil (mantém o default 0 / valor atual)
+  def ordem_param
+    return if params[:ordem].blank?
+
+    Integer(params[:ordem])
+  rescue ArgumentError, TypeError
+    nil
   end
 
   # Salva a imagem enviada pelo usuário
@@ -163,6 +178,7 @@ class CategoriasDeImagensController < ApplicationController
     json = {
       id: categoria.id,
       nome: categoria.nome,
+      ordem: categoria.ordem,
       imagem_url: categoria.imagem_url,
       created_at: categoria.created_at,
       updated_at: categoria.updated_at
