@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   # PATCH /categorias_de_imagens/:id → atualizar (autenticado)
   # DELETE /categorias_de_imagens/:id → deletar (autenticado)
   resources :categorias_de_imagens do
-    resources :imagens # Rotas aninhadas para imagens
+    resources :imagens
   end
+
+  resources :colecaos
 end

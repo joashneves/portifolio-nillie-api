@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_21_120000) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_25_230001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -24,6 +24,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_120000) do
     t.index ["ordem"], name: "index_categoria_de_imagens_on_ordem"
   end
 
+  create_table "colecaos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "imagem_caminho"
+    t.string "nome"
+    t.integer "ordem", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["ordem"], name: "index_colecaos_on_ordem"
+  end
+
   create_table "imagens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "categoria_de_imagens_id"
     t.datetime "created_at", null: false
@@ -32,6 +41,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_120000) do
     t.string "nome"
     t.datetime "updated_at", null: false
     t.index ["categoria_de_imagens_id"], name: "index_imagens_on_categoria_de_imagens_id"
+  end
+
+  create_table "imagens_de_colecaos", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "colecao_id", null: false
+    t.datetime "created_at", null: false
+    t.string "descricao"
+    t.string "imagem_caminho"
+    t.string "nome"
+    t.datetime "updated_at", null: false
+    t.index ["colecao_id"], name: "index_imagens_de_colecaos_on_colecao_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -44,4 +63,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_21_120000) do
   end
 
   add_foreign_key "imagens", "categoria_de_imagens", column: "categoria_de_imagens_id"
+  add_foreign_key "imagens_de_colecaos", "colecaos"
 end
