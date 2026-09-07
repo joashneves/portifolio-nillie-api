@@ -60,4 +60,14 @@ Rails.application.routes.draw do
   end
 
   resources :colecaos
+
+  # Rotas de sketchbook (mesma estrutura de categorias_de_imagens)
+  # GET /sketchbooks → listar todos
+  # GET /sketchbooks/:id → ver detalhes + imagens
+  # POST /sketchbooks → criar (autenticado)
+  # PATCH /sketchbooks/:id → atualizar (autenticado)
+  # DELETE /sketchbooks/:id → deletar (autenticado)
+  resources :sketchbooks do
+    resources :imagens_de_sketchbooks
+  end
 end

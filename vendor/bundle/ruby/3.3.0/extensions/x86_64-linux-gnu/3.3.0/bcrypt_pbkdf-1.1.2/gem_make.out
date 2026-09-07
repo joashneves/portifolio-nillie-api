@@ -1,0 +1,22 @@
+current directory: /home/joash/Projetos/nicolleportifolio/portifolio-nillie-api/vendor/bundle/ruby/3.3.0/gems/bcrypt_pbkdf-1.1.2/ext/mri
+/usr/bin/ruby3.3 -I/usr/lib/ruby/vendor_ruby extconf.rb
+creating Makefile
+
+current directory: /home/joash/Projetos/nicolleportifolio/portifolio-nillie-api/vendor/bundle/ruby/3.3.0/gems/bcrypt_pbkdf-1.1.2/ext/mri
+make DESTDIR\= sitearchdir\=./.gem.20260906-609725-vscw7x sitelibdir\=./.gem.20260906-609725-vscw7x clean
+
+current directory: /home/joash/Projetos/nicolleportifolio/portifolio-nillie-api/vendor/bundle/ruby/3.3.0/gems/bcrypt_pbkdf-1.1.2/ext/mri
+make DESTDIR\= sitearchdir\=./.gem.20260906-609725-vscw7x sitelibdir\=./.gem.20260906-609725-vscw7x
+compiling bcrypt_pbkdf.c
+compiling bcrypt_pbkdf_ext.c
+compiling blowfish.c
+compiling explicit_bzero.c
+compiling hash_sha512.c
+linking shared-object bcrypt_pbkdf_ext.so
+
+current directory: /home/joash/Projetos/nicolleportifolio/portifolio-nillie-api/vendor/bundle/ruby/3.3.0/gems/bcrypt_pbkdf-1.1.2/ext/mri
+make DESTDIR\= sitearchdir\=./.gem.20260906-609725-vscw7x sitelibdir\=./.gem.20260906-609725-vscw7x install
+/usr/bin/install -c -m 0755 bcrypt_pbkdf_ext.so ./.gem.20260906-609725-vscw7x
+
+current directory: /home/joash/Projetos/nicolleportifolio/portifolio-nillie-api/vendor/bundle/ruby/3.3.0/gems/bcrypt_pbkdf-1.1.2/ext/mri
+make DESTDIR\= sitearchdir\=./.gem.20260906-609725-vscw7x sitelibdir\=./.gem.20260906-609725-vscw7x clean

@@ -48,7 +48,7 @@ class ColecaosController < ApplicationController
   end
 
   def colecao_params
-    params.permit(:nome)
+    params.permit(:nome, :ordem, :imagem)
   end
 
   def ordem_param
